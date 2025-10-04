@@ -1,0 +1,3 @@
+[submodule "modelica-rust-ffi"]
+	path = modelica-rust-ffi
+	url = https://github.com/bondlegend4/modelica-rust-ffi.git
