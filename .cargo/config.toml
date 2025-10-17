@@ -1,0 +1,5 @@
+[build]
+rustflags = [
+    "-C", "link-arg=-Wl,-rpath,/Applications/OpenModelica/build_cmake/install_cmake/lib/omc",
+    "-C", "link-arg=-Wl,-rpath,/Applications/OpenModelica/build_cmake/install_cmake/lib"
+]

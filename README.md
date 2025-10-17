@@ -103,66 +103,12 @@ heater_state_address = 40002
 
 If no config file exists, defaults are used.
 
-## Testing with modbus-cli
+## Testing 
+# Integration test
+cargo test --test modbus_client_test -- --nocapture
 
-### Read Registers
-
-```bash
-# Read temperature (address 40001)
-modbus-cli read -a 40001 tcp://localhost:5502
-
-# Read heater state (address 40002)
-modbus-cli read -a 40002 tcp://localhost:5502
-
-# Read both registers
-modbus-cli read -a 40001 -c 2 tcp://localhost:5502
-```
-
-### Control Heater
-
-```bash
-# Turn heater ON
-modbus-cli write -a 0 true tcp://localhost:5502
-
-# Turn heater OFF
-modbus-cli write -a 0 false tcp://localhost:5502
-
-# Read coil state
-modbus-cli read -c -a 0 tcp://localhost:5502
-```
-
-### Example Session
-
-```bash
-# Terminal 1: Start server
-$ cargo run --release
-SimpleThermalMVP Modbus TCP Server
-===================================
-
-Configuration:
-  Port: 5502
-  Update interval: 100 ms
-  Temperature register: 40001
-  Heater state register: 40002
-  Heater control coil: 0
-
-Starting Modbus TCP server on 0.0.0.0:5502
-Server running. Press Ctrl+C to stop.
-
-# Terminal 2: Test with modbus-cli
-$ modbus-cli read -a 40001 tcp://localhost:5502
-25000  # 250.0 K initial temperature
-
-$ modbus-cli write -a 0 true tcp://localhost:5502  # Turn heater ON
-
-$ sleep 5
-
-$ modbus-cli read -a 40001 tcp://localhost:5502
-25234  # 252.34 K - temperature increased!
-
-$ modbus-cli read -a 40002 tcp://localhost:5502
-100  # Heater is ON
-```
+# Or run example client
+cargo run --example simple_client
 
 ## Integration with SCADA Systems
 
