@@ -68,11 +68,6 @@ Minimal viable Modbus TCP server exposing the `SimpleThermalMVP` Modelica simula
    cargo build --release
    ```
 
-2. **Install modbus-cli for testing:**
-   ```bash
-   cargo install modbus-cli
-   ```
-
 ### Build and Run
 
 ```bash
@@ -105,10 +100,15 @@ If no config file exists, defaults are used.
 
 ## Testing 
 # Integration test
+```bash
 cargo test --test modbus_client_test -- --nocapture
+```
 
 # Or run example client
+```bash
 cargo run --example simple_client
+```
+
 
 ## Integration with SCADA Systems
 
