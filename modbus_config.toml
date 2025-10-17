@@ -1,0 +1,14 @@
+# Modbus TCP Server Configuration for SimpleThermalMVP
+
+# Server settings
+port = 5502
+update_interval_ms = 100  # Simulation update rate (100ms = 10 Hz)
+
+# Register mapping
+[registers]
+# Holding register addresses (Modbus convention: 40001-49999)
+temperature_address = 40001  # Temperature in K × 100 (e.g., 27315 = 273.15 K)
+heater_state_address = 40002  # Heater state: 0 = OFF, 100 = ON
+
+# Note: Heater control uses Coil 0 (addresses 00001-09999)
+# Write to coil 0 to turn heater ON/OFF

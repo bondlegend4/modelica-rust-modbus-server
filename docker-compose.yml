@@ -1,0 +1,19 @@
+version: '3.8'
+
+networks:
+  modbus-net:
+    driver: bridge
+
+services:
+  modbus-server:
+    build: .
+    container_name: modbus-server
+    ports:
+      - "5502:5502"
+    networks:
+      - modbus-net
+    environment:
+      - RUST_LOG=info
+    volumes:
+      - ./modbus_config.toml:/app/modbus_config.toml:ro
+    restart: unless-stopped
