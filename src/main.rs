@@ -251,15 +251,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Start Modbus server
     let socket_addr: SocketAddr = format!("0.0.0.0:{}", config.port).parse()?;
     println!("\nStarting Modbus TCP server on {}", socket_addr);
-    println!("\nUsage:");
-    println!("  Read temperature:  modbus-cli read -a {} tcp://localhost:{}", 
-            config.registers.temperature_address, config.port);
-    println!("  Read heater state: modbus-cli read -a {} tcp://localhost:{}", 
-            config.registers.heater_state_address, config.port);
-    println!("  Turn heater ON:    modbus-cli write -a 0 true tcp://localhost:{}", config.port);
-    println!("  Turn heater OFF:   modbus-cli write -a 0 false tcp://localhost:{}", config.port);
+    println!("\nRegister Mapping:");
+    println!("  Register {}: Temperature (K × 100)", config.registers.temperature_address);
+    println!("  Register {}: Heater State (0=OFF, 100=ON)", config.registers.heater_state_address);
+    println!("  Coil 0: Heater Control (write TRUE=ON, FALSE=OFF)");
+    println!("\nTesting:");
+    println!("  cargo test --test modbus_client_test -- --nocapture");
+    println!("  cargo run --example simple_client");
     println!("\nServer running. Press Ctrl+C to stop.\n");
-
     let listener = tokio::net::TcpListener::bind(socket_addr).await?;
 
     let server = tokio_modbus::server::tcp::Server::new(listener);

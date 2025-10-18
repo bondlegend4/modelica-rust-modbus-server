@@ -11,7 +11,7 @@ services:
     ports:
       - "5502:5502"
     networks:
-      - modbus-net
+      - ics
     environment:
       - RUST_LOG=info
     volumes:

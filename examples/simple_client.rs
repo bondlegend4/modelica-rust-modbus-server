@@ -12,13 +12,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Connected to server at {}\n", socket_addr);
     
     loop {
-        // Read temperature
-        let temp_raw = ctx.read_holding_registers(40001, 1).await??;
+        // Read temperature (register 100)
+        let temp_raw = ctx.read_holding_registers(100, 1).await??;
         let temperature = temp_raw[0] as f64 / 100.0;
         let temp_c = temperature - 273.15;
         
-        // Read heater state
-        let heater = ctx.read_holding_registers(40002, 1).await??;
+        // Read heater state (register 101)
+        let heater = ctx.read_holding_registers(101, 1).await??;
         let heater_on = heater[0] == 100;
         
         println!("Temperature: {:.2} K ({:.2}°C) | Heater: {}", 

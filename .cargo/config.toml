@@ -1,5 +1,19 @@
-[build]
+# This is for macOS local development
+[target.aarch64-apple-darwin]
 rustflags = [
     "-C", "link-arg=-Wl,-rpath,/Applications/OpenModelica/build_cmake/install_cmake/lib/omc",
     "-C", "link-arg=-Wl,-rpath,/Applications/OpenModelica/build_cmake/install_cmake/lib"
+]
+
+# This is for Linux/Docker
+[target.x86_64-unknown-linux-gnu]
+rustflags = [
+    "-C", "link-arg=-Wl,-rpath,/usr/lib/omc",
+    "-C", "link-arg=-Wl,-rpath,/usr/lib"
+]
+
+[target.aarch64-unknown-linux-gnu]
+rustflags = [
+    "-C", "link-arg=-Wl,-rpath,/usr/lib/omc",
+    "-C", "link-arg=-Wl,-rpath,/usr/lib"
 ]
